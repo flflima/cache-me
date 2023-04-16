@@ -23,7 +23,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	implementation("com.github.ben-manes.caffeine:caffeine:3.1.2")
+	implementation("com.github.ben-manes.caffeine:caffeine:3.1.5")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-registry-prometheus:1.10.5")
 }
 
 tasks.withType<KotlinCompile> {

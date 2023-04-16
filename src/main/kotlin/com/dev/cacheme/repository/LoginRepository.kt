@@ -1,4 +1,4 @@
-package com.dev.cacheme.cacheme.repository
+package com.dev.cacheme.repository
 
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.context.annotation.Scope

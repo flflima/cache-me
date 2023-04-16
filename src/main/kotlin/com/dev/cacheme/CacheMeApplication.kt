@@ -1,4 +1,4 @@
-package com.dev.cacheme.cacheme
+package com.dev.cacheme
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
