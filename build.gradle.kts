@@ -26,6 +26,9 @@ dependencies {
 	implementation("com.github.ben-manes.caffeine:caffeine:3.1.5")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("io.micrometer:micrometer-registry-prometheus:1.10.5")
+
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4")
 }
 
 tasks.withType<KotlinCompile> {

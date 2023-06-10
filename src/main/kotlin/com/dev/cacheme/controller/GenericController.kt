@@ -1,13 +1,16 @@
 package com.dev.cacheme.controller
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 
 abstract class GenericController {
+    private val logger: Logger = LoggerFactory.getLogger(GenericController::class.java)
 
     fun execute(fn: () -> ResponseEntity<Any>): ResponseEntity<Any> {
-        println("antes")
+        logger.debug("antes")
         val result = fn.invoke()
-        println("depois")
+        logger.debug("depois")
         return result
     }
 }
