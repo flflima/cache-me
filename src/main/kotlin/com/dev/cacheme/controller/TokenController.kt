@@ -4,13 +4,15 @@ import com.dev.cacheme.repository.LoginRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class TokenController: GenericController() {
+class TokenController : GenericController() {
 
     @Autowired
     lateinit var loginRepository: LoginRepository
@@ -24,16 +26,16 @@ class TokenController: GenericController() {
         }
     }
 
-    @GetMapping("/token2")
+    @GetMapping("/token/v2")
     suspend fun getToken2(): ResponseEntity<*> {
         logger.info("-----> Coroutines")
-        return ResponseEntity.ok(Response(loginRepository.getToken2()))
+        return ResponseEntity.ok(Response(loginRepository.getTokenV2()))
     }
 
-    @GetMapping("/token3/{id}")
+    @GetMapping("/token/v3/{id}")
     suspend fun getToken3(@PathVariable id: String): ResponseEntity<*> {
         logger.info("-----> Coroutines")
-        return ResponseEntity.ok(Response(loginRepository.getToken3(id)))
+        return ResponseEntity.ok(Response(loginRepository.getTokenV3(id)))
     }
 }
 

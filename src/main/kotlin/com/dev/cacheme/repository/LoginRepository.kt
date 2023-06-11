@@ -28,13 +28,13 @@ class LoginRepository(cacheManager: CacheManager) {
         private const val salt = "abc"
     }
 
-    @Cacheable("token", sync = true)
+    @Cacheable(cacheNames = ["token"], sync = true)
     fun getToken(): String {
         simulateSlowService()
         return UUID.randomUUID().toString()
     }
 
-    suspend fun getToken2(): String {
+    suspend fun getTokenV2(): String {
         return mutex.withLock {
             val key = "key"
             val cacheByKey = cache.get(key, String::class.java)
@@ -51,20 +51,20 @@ class LoginRepository(cacheManager: CacheManager) {
         }
     }
 
-    suspend fun getToken3(id: String): String {
+    suspend fun getTokenV3(id: String): String {
         return mutex.withLock {
-            println("Unconfined            : I'm working in thread ${Thread.currentThread().name}")
             val key = Objects.hash(id + salt)
             val cacheByKey = cache.get(key, String::class.java)
             if (cache.get(key) != null && cacheByKey != null) {
+                throw RuntimeException("ERRO")
                 logger.info("-----> #Cache")
                 cacheByKey
             } else {
                 waitslow()
                 logger.info("-----> #Generating token")
                 val token = "${id}---ABC---${LocalDateTime.now()}"
-                val valueWrapper = cache.putIfAbsent(key, token)
-                valueWrapper?.get() as String? ?: token
+                cache.put(key, token)
+                token
             }
         }
     }
